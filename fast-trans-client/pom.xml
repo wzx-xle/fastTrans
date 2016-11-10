@@ -8,20 +8,44 @@
         <groupId>ren.wxyz</groupId>
         <version>0.1</version>
     </parent>
+
     <groupId>ren.wxyz.ft</groupId>
     <artifactId>fast-trans-client</artifactId>
     <version>0.1</version>
-    <name>fast-trans-client</name>
-    <url>http://maven.apache.org</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+
+    <build>
+        <finalName>fastTrans</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <filters>
+            <filter>src/env/${filter.env}/common.properties</filter>
+        </filters>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <filter.env>dev</filter.env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <filter.env>prd</filter.env>
+            </properties>
+        </profile>
+    </profiles>
 </project>
